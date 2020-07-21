@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>放大镜</title>
+</head>
+<style>
+     .imgShow{
+        width: 1025px;
+        height: 400px;
+        margin: 0 auto;
+        display: flex;
+    }
+    .img{
+        width: 500px;
+        height: 200px;
+        overflow: hidden;
+        background: rgb(249, 247, 250);
+        position: relative;
+    }
+    .img img{
+        width: 100%;
+        height: 100%;
+    }
+    .bigImg{
+        width: 300px;
+        height: 300px;
+        overflow: hidden;
+        position: relative;
+    }
+    .bigImg img{
+        position: absolute;
+        width: 2100px;
+        height: 1675px;
+    }
+
+    .floatBlock{
+        width: 50px;
+        position: absolute;
+        height: 50px;
+        background: rgba(0,0,0,.3);
+        display: none;
+    }
+    
+    
+</style>
+<body>
+
+
+    <div class="imgShow">
+        <div class="img">
+            <img src="img.jpg">
+            <div class="floatBlock"></div>
+        </div>
+        <div class="bigImg">
+            <img src="img.jpg">
+        </div>
+    </div>
+
+
+</body>
+<script>
+    var smallImage = document.querySelector(".img");
+    var floatBlock = document.querySelector(".floatBlock");
+    var bigImage = document.querySelector(".bigImg img");
+    var bigImg = document.querySelector(".bigImg");
+    var bIWidth = bigImage.width;
+    var bIHeight = bigImage.Height;
+
+    smallImage.onmouseover = function (ev) {
+        floatBlock.style.display = "block";
+        var smallLeft = smallImage.offsetLeft;
+        var smallTop = smallImage.offsetTop;
+        var smallWidth = smallImage.offsetWidth;
+        var smallHeight = smallImage.offsetHeight;
+        var clientX = ev.clientX;
+        var clientY = ev.clientY;
+        floatBlock.style.top = (clientY)+"px";
+        floatBlock.style.left = (clientX)+"px";
+        smallImage.onmousemove = function (mouse) {
+            var mouseClientX = mouse.pageX;
+            var mouseClientY = mouse.pageY;
+            var mouseLeft = smallImage.offsetLeft;
+            var mouseTop = smallImage.offsetHeight;
+            var fbWidth = floatBlock.clientWidth;
+            var fbTop = mouseClientY - smallTop - fbWidth/2;
+            var fbLeft = mouseClientX - smallLeft - fbWidth/2;
+            floatBlock.style.top = fbTop <= 0 ? 0 : fbTop > (smallHeight- fbWidth) ? smallHeight - fbWidth :fbTop +"px";
+            floatBlock.style.left = fbLeft <= 0 ? 0 : fbLeft > (smallWidth- fbWidth) ? smallWidth - fbWidth :fbLeft+"px";
+            bigImage.style.left = -(fbLeft <= 0 ? 0 : fbLeft > (smallWidth- fbWidth) ? (smallWidth - fbWidth) :fbLeft)*(bIWidth/smallWidth)+"px";
+            bigImage.style.top = -(fbTop <= 0 ? 0 : fbTop > (smallHeight- fbWidth) ? (smallHeight - fbWidth) :fbTop )*(bIWidth/smallWidth)+"px";
+        }
+
+
+    }
+
+    smallImage.onmouseout = function () {
+        floatBlock.style.display = "none";
+    }
+</script>
+</html>
