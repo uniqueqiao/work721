@@ -1,0 +1,40 @@
+<!--  index.html  -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Typing Game</title>
+    <link rel="stylesheet" type="text/css" href="main.css">
+</head>
+<body>
+<div id="container">
+    <!--  显示游戏提示  -->
+    <div id="tools">
+        <div class="list">
+            <h2>打字小游戏</h2>
+            <p>
+                到达底线消灭游戏框中出现的字母
+            </p>
+        </div>
+        <div class="list">
+            <h2>游戏过关要求</h2>
+            <p>首局游戏需得分<span id="need">10</span>分，每关累计加十分可过关
+            </p>
+        </div>
+    </div>
+    <!--  背景盒  -->
+    <div id="box" style="height: 640px; width: 760px;">
+        <div id="panel">得分：<span id="score">0</span></div>
+        <button id="start" class="btn">开始游戏</button>
+        <button id="stop" class="btn">停止游戏</button>
+        <!--  游戏的部分  -->
+        <div id="gameBox" style="height: 610px; width: 585px;">
+        </div>
+        <div id="danger">
+            <hr/>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="main.js"></script>
+</body>
+</html>

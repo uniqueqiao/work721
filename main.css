@@ -1,0 +1,142 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    /*  Box-model  */
+    height: 100%;
+    /*  Typography  */
+    color: #fff;
+    font-family: helvetica, arial, sans-serif;
+    /*  Visual  */
+    background: -webkit-linear-gradient(#15b3f1, #c3c3c3);
+    background: -o-linear-gradient(#15b3f1, #c3c3c3);
+    background: -moz-linear-gradient(#15b3f1, #c3c3c3);
+    background: linear-gradient(#15b3f1, #c3c3c3);
+}
+
+#container {
+    /*  Positioning  */
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    /*  Box-model  */
+    display: block;
+    width: 80%;
+    max-width: 1140px;
+}
+
+#tools {
+    /* Positioning */
+    position: absolute;
+    top: 32%;
+    left: 25%;
+    margin-top: 50px;
+    z-index: 100;
+    /*  Box-model  */
+    display: block;
+    padding: 5px;
+}
+
+#tools .list {
+    /* Positioning */
+    margin-bottom: 35px;
+    /*  Typography  */
+    font-family: "Microsoft YaHei UI", "微软雅黑";
+}
+
+#panel {
+    /* Positioning */
+    position: absolute;
+    right: 5%;
+    top: 5%;
+    z-index: 100;
+    /*  Box-model  */
+    display: none;
+    /*  Typography  */
+    font-family: "Microsoft YaHei UI", "微软雅黑";
+    font-weight: 700;
+    /*  Visual  */
+    text-shadow: 2px 2px 3px rgba(255, 255, 255, 0.5);
+    /*  Misc  */
+}
+
+.btn {
+    /*  Positioning  */
+    z-index: 100;
+    /*  Box-model  */
+    display: inline-block;
+    width: 80px;
+    height: 40px;
+    /*  Typography  */
+    font-family: helvetica, Arial, sans-serif;
+    line-height: 40px;
+    text-align: center;
+    /*  Visual  */
+    color: #fff;
+    background-color: #999;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
+    -webkit-box-shadow: 0 0 2px 5px rgba(14, 245, 233, 0.5);
+    -moz-box-shadow: 0 0 2px 5px rgba(14, 245, 233, 0.5);
+    box-shadow: 0 0 2px 5px rgba(14, 245, 233, 0.5);
+    /*  Misc  */
+    opacity: 0.8;
+    cursor: pointer;
+}
+
+#start {
+    /*  Positioning  */
+    position: absolute;
+    right: 5%;
+    top: 34%;
+}
+
+#stop {
+    /*  Positioning  */
+    position: absolute;
+    right: 5%;
+    top: 48%;
+
+}
+
+#box {
+    /*  Positioning  */
+    position: relative;
+    top: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    /*  Box-model  */
+    display: block;
+    height: 640px;
+    width: 760px;
+    /*  Visual  */
+    /* background-image: url("backdrop.png"); */
+    border: 1px solid #888;
+    /*  Misc  */
+    opacity: 1;
+}
+
+#gameBox {
+    /*  Positioning  */
+    position: relative;
+    /* Box-model */
+    margin-top: 20px;
+    margin-left: 20px;
+}
+
+#danger {
+    /*  Positioning  */
+    position: absolute;
+    left: 0;
+    bottom: 30px;
+    /*  Box-model  */
+    width: 100%;
+    /*  Typography  */
+    text-align: center;
+    /*  Visual */
+    color: #c3c3c3;
+    border-top: 5px dotted #c3c3c3;
+}
