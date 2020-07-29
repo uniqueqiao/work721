@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body,ul,li{
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+        .wheel{
+            width: 300px;
+            height: 300px;
+            position: absolute;
+            left: 0; top: 0;right: 0;bottom: 0;
+            margin: auto;
+        }
+        .scene{
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            left: 0; top: 0;
+            perspective: 800px;
+        }
+        .box{
+            width: 100%;height: 100%;
+            position: absolute;
+            left: 0; top: 0;border: 1px solid blueviolet;
+            transform-origin: center center -150px;
+            transition: transform 2s ease;
+            transform-style:preserve-3d ;
+            
+        }
+        .box div{
+            width: 100%;height: 100%;
+            position: absolute;
+            left: 0; top: 0;
+            font-size: 100px;
+            color: #fff;
+            text-align: center;
+            line-height: 300px;
+        }
+        .box div:nth-child(1){
+            background: url("img/p1.jpg") center;
+            transform-origin: top;
+            transform: rotateX(-90deg);
+        }
+        .box div:nth-child(2){
+            background: url("img/p2.jpg") center;
+            transform-origin: left;
+            transform: rotateY(90deg);
+        }
+        .box div:nth-child(3){
+            background: url("img/p3.jpg") center;
+            transform: translateZ(-300px) rotateX(180deg);
+        }
+        .box div:nth-child(4){
+            background: url("img/p4.jpg") center;
+            transform-origin: right;
+            transform: rotateY(-90deg);
+        }
+        .box div:nth-child(5){
+            background: url("img/p5.jpg") center;
+            background-position: 100% 100%;
+            transform-origin: bottom;
+            transform: rotateX(90deg);
+        }
+        .box div:nth-child(6){
+            background: url("img/p6.jpg") center;
+        }
+        .left{
+            position: absolute;
+            left: -40px;
+            height: 100%;
+            line-height: 300px;
+            top:0;
+            font-size: 30px;
+            cursor: pointer;
+        }
+        .right{
+            position: absolute;
+            right: -40px;
+            height: 100%;
+            line-height: 300px;
+            top:0;
+            font-size: 30px;
+            cursor: pointer;
+        }
+        .btns{
+            position: absolute;
+            bottom: -50px;
+            width: 100%;
+            height: 30px;
+            /* border: 1px solid red ; */
+        }
+        .btns li{
+            width: 20px;height: 20px;
+            border-radius: 50%;
+            box-shadow: 0 0 5px #666;
+            float: left;
+            color: #fff;
+            background: #666;
+            margin-left: 20px;
+            text-align: center;
+            line-height: 20px;
+            cursor: pointer;
+        }
+        /* .box:hover{
+            transform: rotateX(90deg);
+        } */
+    </style>
+</head>
+<body>
+    <div class="wheel">
+        <div class="scene">
+            <div class="box">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+        <div class="left">
+            &lt;
+        </div>
+        <div class="right">
+            &gt;
+        </div>
+        <ul class="btns">
+            <li style="background: #000;">1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+        </ul>
+    </div>
+    <script>
+        var wheel=document.querySelector(".wheel"); 
+        var box=document.querySelector(".box"); 
+        var left=document.querySelector(".left");
+        var right=document.querySelector(".right");
+        var btns=document.querySelectorAll(".btns li");
+
+        var angle=90;
+        var num=0;
+        function run(){
+            num++;
+            box.style.transform="rotateX("+num*angle+"deg)";
+
+            for(var i=0;i<btns.length;i++){
+                btns[i].style.background="#777";
+            }
+            btns[num%4].style.background="#000"
+        }
+
+        var t=setInterval(run,3000)
+        window.onblur=function(){
+            clearInterval(t);
+        }
+        window.onfocus=function(){
+            t=setInterval(run,3000)
+        }
+
+        wheel.onmouseover=function(){
+            clearInterval(t);
+        }
+        wheel.onmouseout=function(){
+            t=setInterval(run,3000)
+        }
+
+        left.onclick=function(){
+            num++;
+            for (var i=0;i<btns.length;i++){
+                btns[i].style.background="#777";
+            }
+            if(num<0){
+                var current=-num;
+            }else{
+                var current=num;
+            }
+            btns[current%4].style.background="#000";
+            box.style.transform="rotateX("+num*angle+"deg)";
+        }
+        right.onclick=function(){
+            num--;
+            for (var i=0;i<btns.length;i++){
+                btns[i].style.background="#777";
+            }
+            if(num<0){
+                var current=-num;
+            }else{
+                var current=num;
+            }
+            btns[current%4].style.background="#000";
+            box.style.transform="rotateX("+num*angle+"deg)";
+        }
+
+        for(let i=0;i<btns.length;i++){
+            btns[i].onclick=function(){
+                num+=(Math.abs(num)%4-i);
+                box.style.transform="rotateX("+num*angle+"deg)";
+                for(var j=0;j<btns.length;j++){
+                    btns[j].style.background="#777";
+                }
+                this.style.background="#000";
+            }
+        }
+
+        mousedir(box,function(val){
+            box.style.transition="none"
+            box.style.transform="rotateX("+((num*angle)+val)+"deg)";
+        },function(val){
+            box.style.transition="none"
+            box.style.transform="rotateX("+((num*angle)+(-val))+"deg)";
+        },function(val){
+            box.style.transition="transform 1s ease";
+            if(val>40){
+                num++;
+            }
+            for (var i=0;i<btns.length;i++){
+                btns[i].style.background="#777";
+            }
+            if(num<0){
+                var current=-num;
+            }else{
+                var current=num;
+            }
+            btns[current%4].style.background="#000";
+            box.style.transform="rotateX("+num*angle+"deg)";
+        },function(val){
+            box.style.transition="transform 1s ease";
+            if(val>40){
+                num--;
+            }
+            for (var i=0;i<btns.length;i++){
+                btns[i].style.background="#777";
+            }
+            if(num<0){
+                var current=-num;
+            }else{
+                var current=num;
+            }
+            btns[current%4].style.background="#000";
+            box.style.transform="rotateX("+num*angle+"deg)";
+        })
+
+        function mousedir(obj,down,up,down1,up1){
+            obj.onmousedown=function(ev){
+                var startx=ev.clientX;
+                var starty=ev.clientY;
+
+                var movex,movey;
+                document.onmousemove=function(ev){
+                    movex=ev.clientX;
+                    movey=ev.clientY;
+                    if(movey>starty){
+                        down(Math.abs(movey-starty));
+                    }else{
+                        up(Math.abs(movey-starty));
+                    }
+                    ev.preventDefault();
+                }
+                document.onmouseup=function(ev){
+                    if(movey>starty){
+                        down1(Math.abs(movey-starty));
+                    }else{
+                        up1(Math.abs(movey-starty));
+                    }
+                    document.onmousemove=null;
+                    document.onmouseup=null;
+                }
+            }
+        }
+    </script>
+</body>
+</html>
